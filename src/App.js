@@ -9,6 +9,9 @@ function Rick() {
     return axios
       .get('https://rickandmortyapi.com/api/character')
       .then(res => res.data.results)
+  },
+  {
+    refetchOnWindowFocus: false,
   })
   console.log(queryInfo)
   return queryInfo.isLoading ? (
