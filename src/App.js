@@ -11,7 +11,7 @@ function Rick() {
       .then(res => res.data.results)
   },
   {
-    refetchOnWindowFocus: false,
+    staleTime: Infinity,
   })
   console.log(queryInfo)
   return queryInfo.isLoading ? (
