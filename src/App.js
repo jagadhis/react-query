@@ -16,7 +16,10 @@ export default function App() {
         return (
           <div>
             <p>{data.id}</p>
-
+            <p>{data.origin.name}</p>
+            <p>{data.gender}</p>
+            <p>{data.species}</p>
+<p>{data.image}</p>
             <p>{data.name}</p>
             <p>{data.status}</p>
           </div>
