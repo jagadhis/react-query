@@ -15,7 +15,8 @@ function useRick(){
 }
 
 function Count(){
-  
+  const queryInfo = useRick();
+  return <h3>You are looking at {queryInfo.data?.length}</h3>
 }
 function Rick() {
 const queryInfo = useRick();
@@ -49,8 +50,8 @@ export default function App(){
   return(
     <div>
     
-      <Rick queryKey="Rick1"/>
-      <Rick queryKey="Rick1"/>
+      <Count/>
+      <Rick/>
      
     <ReactQueryDevtools />
     </div>
