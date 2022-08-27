@@ -15,7 +15,9 @@ console.log(queryInfo)
       {queryInfo.data?.map(data => {
         return(
           <div> 
-{data.data}
+{data.id}
+{data.name}
+{data.status}
           </div>
         )
       })}
