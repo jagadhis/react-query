@@ -16,6 +16,7 @@ function useRick(){
 
 function Count(){
   const queryInfo = useRick();
+  
   return <h3>You are looking at {queryInfo.data?.length}</h3>
 }
 function Rick() {
@@ -45,6 +46,39 @@ const queryInfo = useRick();
   )
 }
 
+function Monty() {
+  const queryInfo = useQuery('Monty', async () => {
+    await new Promise(resolve => setTimeout(resolve, 1000))
+    return axios
+      .get('https://rickandmortyapi.com/api/character/?page=20')
+      .then(res => res.data.results)
+  })
+
+  return queryInfo.isLoading ? (
+    'Loading...'
+  ) : queryInfo.isError ? (
+    queryInfo.error.message
+  ) : (
+    <div>
+      {queryInfo.data.map(data => {
+        return( <div>
+           <p>{data.id}</p>
+            <p>{data.origin.name}</p>
+            <p>{data.gender}</p>
+            <p>{data.species}</p>
+            <p>{data.image}</p>
+            <p>{data.name}</p>
+            <p>{data.status}</p>
+        </div> )
+      })}
+      <br />
+      {queryInfo.isFetching ? 'Updating...' : null}
+    </div>
+  )
+}
+
+
+
 export default function App(){
 
   return(
@@ -52,6 +86,7 @@ export default function App(){
     
       <Count/>
       <Rick/>
+      <Monty/>
      
     <ReactQueryDevtools />
     </div>
