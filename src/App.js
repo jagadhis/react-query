@@ -4,22 +4,21 @@ import { ReactQueryDevtools } from 'react-query/devtools';
 import axios from 'axios'
 
 
-
-
-function Rick({queryKey}) {
-  const queryInfo = useQuery(queryKey, async() =>{
+function useRick(){
+  return useQuery("Rick",async()=>{
     await new Promise(resolve => setTimeout(resolve,1000))
     return axios
       .get('https://rickandmortyapi.com/api/character')
       .then(res => res.data.results)
-  },
-  {
-    staleTime: Infinity,
-  },
-  {
-    cacheTime: Infinity,
+  
   })
-  console.log(queryInfo)
+}
+
+function Count(){
+  
+}
+function Rick() {
+const queryInfo = useRick();
   return queryInfo.isLoading ? (
     "Loading ..." 
   ): queryInfo.isError?(
@@ -46,13 +45,10 @@ function Rick({queryKey}) {
 }
 
 export default function App(){
-  const [show, toggle] = React.useReducer(d => !d, true)
+
   return(
     <div>
-        <button onClick={() => toggle()}>{show ? 'Hide' : 'Show'}</button>
-      <br />
-      <br />
-      {show ? <Rick/> : null}
+    
       <Rick queryKey="Rick1"/>
       <Rick queryKey="Rick1"/>
      
