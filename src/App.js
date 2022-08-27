@@ -9,7 +9,9 @@ export default function App() {
       .then(res => res.data.results)
   )
   console.log(queryInfo)
-  return (
+  return queryInfo.isLoading ? (
+    "Loading ..." 
+  ):(
     <div>
 
       {queryInfo.data?.map(data => {
@@ -19,7 +21,7 @@ export default function App() {
             <p>{data.origin.name}</p>
             <p>{data.gender}</p>
             <p>{data.species}</p>
-<p>{data.image}</p>
+            <p>{data.image}</p>
             <p>{data.name}</p>
             <p>{data.status}</p>
           </div>
