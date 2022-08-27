@@ -8,16 +8,17 @@ export default function App() {
       .get('https://rickandmortyapi.com/api/character')
       .then(res => res.data.results)
   )
-console.log(queryInfo)
+  console.log(queryInfo)
   return (
     <div>
-    
+
       {queryInfo.data?.map(data => {
-        return(
-          <div> 
-{data.id}
-{data.name}
-{data.status}
+        return (
+          <div>
+            <p>{data.id}</p>
+
+            <p>{data.name}</p>
+            <p>{data.status}</p>
           </div>
         )
       })}
