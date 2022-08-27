@@ -12,6 +12,9 @@ function Rick() {
   },
   {
     staleTime: Infinity,
+  },
+  {
+    cacheTime: Infinity,
   })
   console.log(queryInfo)
   return queryInfo.isLoading ? (
@@ -40,8 +43,13 @@ function Rick() {
 }
 
 export default function App(){
+  const [show, toggle] = React.useReducer(d => !d, true)
   return(
     <div>
+        <button onClick={() => toggle()}>{show ? 'Hide' : 'Show'}</button>
+      <br />
+      <br />
+      {show ? <Rick/> : null}
       <Rick/>
      
     <ReactQueryDevtools />
