@@ -3,8 +3,8 @@ import { useQuery } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools';
 import axios from 'axios'
  
-function Rick() {
-  const queryInfo = useQuery('Rick', async() =>{
+function Rick({queryKey}) {
+  const queryInfo = useQuery(queryKey, async() =>{
     await new Promise(resolve => setTimeout(resolve,1000))
     return axios
       .get('https://rickandmortyapi.com/api/character')
@@ -50,7 +50,8 @@ export default function App(){
       <br />
       <br />
       {show ? <Rick/> : null}
-      <Rick/>
+      <Rick queryKey="Rick1"/>
+      <Rick queryKey="Rick1"/>
      
     <ReactQueryDevtools />
     </div>
