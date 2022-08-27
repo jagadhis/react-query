@@ -2,7 +2,10 @@ import React from 'react'
 import { useQuery } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools';
 import axios from 'axios'
- 
+
+
+
+
 function Rick({queryKey}) {
   const queryInfo = useQuery(queryKey, async() =>{
     await new Promise(resolve => setTimeout(resolve,1000))
