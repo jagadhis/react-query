@@ -5,7 +5,7 @@ import axios from 'axios'
  
 function Rick() {
   const queryInfo = useQuery('Rick', async() =>{
-    await new Promise(resolve => setTimeout(resolve,5000))
+    await new Promise(resolve => setTimeout(resolve,1000))
     return axios
       .get('https://rickandmortyapi.com/api/character')
       .then(res => res.data.results)
@@ -33,6 +33,8 @@ function Rick() {
           </div>
         )
       })}
+       <br />
+      {queryInfo.isFetching ? 'Updating...' : null}
     </div>
   )
 }
