@@ -95,16 +95,20 @@ export default function App(){
 
 
 function RickSearch({id}){
-  const queryInfo = useQuery(['RickSearch',{id}],async({id})=>{
+  const queryInfo = useQuery(['RickSearch'],async()=>{
     await new Promise(resolve => setTimeout(resolve,1000))
     return axios
-    .get(`https://rickandmortyapi.com/api/character/?id=${id}`)
+    .get(`https://rickandmortyapi.com/api/character/${id}`)
     .then(res=>res.data)
   },
   {
-    enabled: true,
+    retry:2,
+    retryDelay:1500,
+    enabled: true,  //enabled should be given in boolean
   })
   console.log(queryInfo);
+  
+  
   return queryInfo.isLoading ? (
     'Loading...'
   ):queryInfo.isError?(
@@ -120,7 +124,7 @@ function RickSearch({id}){
       {queryInfo.isFetching ? 'Updating...' : null}
     </div>
   )
-    }
+}
 
 
 
