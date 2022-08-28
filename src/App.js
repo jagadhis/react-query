@@ -81,7 +81,7 @@ import axios from 'axios'
 // }
 
 export default function App(){
-  const {id,setId} = React.useState('')
+  const [id,setId] = React.useState('')
     return(
       <div>
       
@@ -98,7 +98,7 @@ function RickSearch({id}){
   const queryInfo = useQuery(['RickSearch',{id}],async({id})=>{
     await new Promise(resolve => setTimeout(resolve,1000))
     return axios
-    .get(`https://rickandmortyapi.com/api/character/${id}`)
+    .get(`https://rickandmortyapi.com/api/character/?id=${id}`)
     .then(res=>res.data)
   })
   console.log(queryInfo);
@@ -110,7 +110,7 @@ function RickSearch({id}){
     <div>
       {queryInfo.data.map(data => {
       return(
-        <p>{data.name}</p>
+        <p>{data.id}</p>
       )
     
     })}:(
