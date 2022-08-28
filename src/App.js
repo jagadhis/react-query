@@ -95,7 +95,7 @@ export default function App(){
 
 
 function RickSearch({id}){
-  const queryInfo = useQuery(['id'],async()=>{
+  const queryInfo = useQuery(['RickSearch',{id}],async({id})=>{
     await new Promise(resolve => setTimeout(resolve,1000))
     return axios
     .get(`https://rickandmortyapi.com/api/character/${id}`)
