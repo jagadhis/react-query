@@ -80,25 +80,48 @@ import axios from 'axios'
 //   )
 // }
 
+export default function App(){
+  const {Rick,setRick} = React.useState('')
+    return(
+      <div>
+      
+       <input value={Rick} onChange={e=>setRick(e.target.value)} />
+       <RickSearch Rick={Rick} />
+       
+      <ReactQueryDevtools />
+      </div>
+    )
+  }
+
 
 function RickSearch({Rick}){
   const queryInfo = useQuery(Rick,async()=>{
     await new Promise(resolve => setTimeout(resolve,1000))
-    return axios.get(`https://rickandmortyapi.com/api/character`).then(res=>res.data)
+    return axios
+    .get(`https://rickandmortyapi.com/api/character/${Rick}`)
+    .then(res=>res.data)
   })
-}
-
-
-export default function App(){
-
-  return(
+  console.log(queryInfo);
+  return queryInfo.isLoading ? (
+    'Loading...'
+  ):queryInfo.isError?(
+    queryInfo.error.message
+  ):(
     <div>
+      {queryInfo.data.map(data => {
+      return(
+        <p>{data.name}</p>
+      )
     
-      <Count/>
-      <Rick/>
-      <Monty/>
-     
-    <ReactQueryDevtools />
+    })}:(
+        'Rick Not Found'
+      )
+      <br />
+      {queryInfo.isFetching?'updating...':null}
     </div>
   )
 }
+
+
+
+
