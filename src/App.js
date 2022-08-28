@@ -108,20 +108,16 @@ function RickSearch({id}){
     queryInfo.error.message
   ):(
     <div>
-      {queryInfo.data.map(data => {
-      return(
-        <p>{data.id}</p>
-      )
-    
-    })}:(
-        'id Not Found'
-      )
+     {queryInfo.data?.results?.id ? (
+        <p>{queryInfo.data.results.id} </p>
+      ) : (
+        'Pokemon not found.'
+      )}
       <br />
-      {queryInfo.isFetching?'updating...':null}
+      {queryInfo.isFetching ? 'Updating...' : null}
     </div>
   )
-}
-
+    }
 
 
 
