@@ -102,7 +102,7 @@ function RickSearch({id}){
     .then(res=>res.data)
   },
   {
-    enabled: id,
+    enabled: true,
   })
   console.log(queryInfo);
   return queryInfo.isLoading ? (
