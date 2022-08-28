@@ -100,6 +100,9 @@ function RickSearch({id}){
     return axios
     .get(`https://rickandmortyapi.com/api/character/?id=${id}`)
     .then(res=>res.data)
+  },
+  {
+    enabled: id,
   })
   console.log(queryInfo);
   return queryInfo.isLoading ? (
