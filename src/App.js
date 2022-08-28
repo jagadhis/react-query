@@ -81,12 +81,12 @@ import axios from 'axios'
 // }
 
 export default function App(){
-  const {Rick,setRick} = React.useState('')
+  const {id,setId} = React.useState('')
     return(
       <div>
       
-       <input value={Rick} onChange={e=>setRick(e.target.value)} />
-       <RickSearch Rick={Rick} />
+       <input value={id} onChange={e=> setId(e.target.value)} />
+       <RickSearch id={id} />
        
       <ReactQueryDevtools />
       </div>
@@ -94,11 +94,11 @@ export default function App(){
   }
 
 
-function RickSearch({Rick}){
-  const queryInfo = useQuery(Rick,async()=>{
+function RickSearch({id}){
+  const queryInfo = useQuery(['id'],async()=>{
     await new Promise(resolve => setTimeout(resolve,1000))
     return axios
-    .get(`https://rickandmortyapi.com/api/character/${Rick}`)
+    .get(`https://rickandmortyapi.com/api/character/${id}`)
     .then(res=>res.data)
   })
   console.log(queryInfo);
@@ -114,7 +114,7 @@ function RickSearch({Rick}){
       )
     
     })}:(
-        'Rick Not Found'
+        'id Not Found'
       )
       <br />
       {queryInfo.isFetching?'updating...':null}
