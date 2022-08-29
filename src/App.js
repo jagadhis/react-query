@@ -3,8 +3,6 @@ import { useQuery } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools';
 //import axios from 'axios'
 
-
-
 //Commented For Trying New Concepts
 
 // function useRick(){
@@ -80,19 +78,6 @@ import { ReactQueryDevtools } from 'react-query/devtools';
 //   )
 // }
 
-export default function App(){
-  const [id,setId] = React.useState('')
-    return(
-      <div>
-      
-       <input value={id} onChange={e=> setId(e.target.value)} />
-       <RickSearch id={id} />
-       
-      <ReactQueryDevtools />
-      </div>
-    )
-  }
-
 //Commented For Next concepts  
 
 // function RickSearch({id}){
@@ -139,6 +124,22 @@ export default function App(){
 //     </div>
 //   )
 // }
+
+
+export default function App(){
+  const [id,setId] = React.useState('')
+    return(
+      <div>
+      
+       <input value={id} onChange={e=> setId(e.target.value)} />
+       <RickSearch id={id} />
+       
+      <ReactQueryDevtools />
+      </div>
+    )
+  }
+
+
 
 
 
