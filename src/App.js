@@ -118,7 +118,7 @@ function RickSearch({id}){
      {queryInfo.data?.results?.id ? (
         <p>{queryInfo.data.results.id} </p>
       ) : (
-        'Pokemon not found.'
+        'id not found.'
       )}
       <br />
       {queryInfo.isFetching ? 'Updating...' : null}
