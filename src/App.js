@@ -1,7 +1,7 @@
 import React from 'react'
 import { useQuery } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools';
-//import axios from 'axios'
+import axios from 'axios'
 
 //Commented For Trying New Concepts
 
@@ -125,14 +125,50 @@ import { ReactQueryDevtools } from 'react-query/devtools';
 //   )
 // }
 
+const email = 'Sincere@april.biz'
+
+function MyPosts() {
+  const userQuery = useQuery('user', () =>
+    axios
+      .get(`https://jsonplaceholder.typicode.com/users?email=${email}`)
+      .then(res => res.data[0])
+  )
+
+  const postsQuery = useQuery(
+    'posts',
+    () =>
+      axios
+        .get(
+          `https://jsonplaceholder.typicode.com/posts?userId=${userQuery.data.id}`
+        )
+        .then(res => res.data),
+    {
+      enabled: true,
+    }
+  )
+
+  return userQuery.isLoading ? (
+    'Loading user...'
+  ) : (
+    <div>
+      User Id: {userQuery.data.id}
+      <br />
+      <br />
+      {postsQuery.isIdle ? null : postsQuery.isLoading ? (
+        'Loading posts...'
+      ) : (
+        <div>Post Count: {postsQuery.data.length}</div>
+      )}
+    </div>
+  )
+}
 
 export default function App(){
-  const [id,setId] = React.useState('')
+
     return(
       <div>
       
-       <input value={id} onChange={e=> setId(e.target.value)} />
-       <RickSearch id={id} />
+      <MyPosts />
        
       <ReactQueryDevtools />
       </div>
