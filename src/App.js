@@ -1,7 +1,7 @@
 import React from 'react'
 import { useQuery } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools';
-import axios from 'axios'
+//import axios from 'axios'
 
 
 
@@ -95,15 +95,28 @@ export default function App(){
 
 
 function RickSearch({id}){
-  const queryInfo = useQuery(['id'],async()=>{
-    await new Promise(resolve => setTimeout(resolve,1000))
-    return axios
-    .get(`https://rickandmortyapi.com/api/character/${id}`)
-    .then(res=>res.data)
+  const queryInfo = useQuery(['id',id],()=>{
+
+    const controller = new AbortController();
+    const signal = controller.signal
+
+    const promise = new Promise(resolve => setTimeout(resolve,1000))
+    .then(()=>{
+      return fetch(`https://rickandmortyapi.com/api/character/${id}`,{
+        method:'get',
+        signal,
+      })
+    })
+  
+    .then(res=>res.json())
+
+    promise.cancel = () =>{
+      controller.abort()
+    }
+    return promise
   },
   {
-    retry:2,
-    retryDelay:1500,
+ 
     enabled: true,  //enabled should be given in boolean
   })
   console.log(queryInfo);
