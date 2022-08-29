@@ -12,13 +12,13 @@ import initialData from './initialData';
 //     return axios
 //       .get('https://rickandmortyapi.com/api/character')
 //       .then(res => res.data.results)
-  
+
 //   })
 // }
 
 // function Count(){
 //   const queryInfo = useRick();
-  
+
 //   return <h3>You are looking at {queryInfo.data?.length}</h3>
 // }
 // function Rick() {
@@ -94,7 +94,7 @@ import initialData from './initialData';
 //         signal,
 //       })
 //     })
-  
+
 //     .then(res=>res.json())
 
 //     promise.cancel = () =>{
@@ -103,12 +103,12 @@ import initialData from './initialData';
 //     return promise
 //   },
 //   {
- 
+
 //     enabled: true,  //enabled should be given in boolean
 //   })
 //   console.log(queryInfo);
-  
-  
+
+
 //   return queryInfo.isLoading ? (
 //     'Loading...'
 //   ):queryInfo.isError?(
@@ -151,20 +151,20 @@ function MyPosts() {
       {userQuery.isFetching ? 'Updating...' : null}
     </div>
   )
-  
+
 }
 
-export default function App(){
+export default function App() {
 
-    return(
-      <div>
-      
+  return (
+    <div>
+
       <MyPosts />
-       
+
       <ReactQueryDevtools />
-      </div>
-    )
-  }
+    </div>
+  )
+}
 
 
 
