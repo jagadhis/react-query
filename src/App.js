@@ -93,51 +93,52 @@ export default function App(){
     )
   }
 
+//Commented For Next concepts  
 
-function RickSearch({id}){
-  const queryInfo = useQuery(['id',id],()=>{
+// function RickSearch({id}){
+//   const queryInfo = useQuery(['id',id],()=>{
 
-    const controller = new AbortController();
-    const signal = controller.signal
+//     const controller = new AbortController();
+//     const signal = controller.signal
 
-    const promise = new Promise(resolve => setTimeout(resolve,1000))
-    .then(()=>{
-      return fetch(`https://rickandmortyapi.com/api/character/${id}`,{
-        method:'get',
-        signal,
-      })
-    })
+//     const promise = new Promise(resolve => setTimeout(resolve,1000))
+//     .then(()=>{
+//       return fetch(`https://rickandmortyapi.com/api/character/${id}`,{
+//         method:'get',
+//         signal,
+//       })
+//     })
   
-    .then(res=>res.json())
+//     .then(res=>res.json())
 
-    promise.cancel = () =>{
-      controller.abort()
-    }
-    return promise
-  },
-  {
+//     promise.cancel = () =>{
+//       controller.abort()
+//     }
+//     return promise
+//   },
+//   {
  
-    enabled: true,  //enabled should be given in boolean
-  })
-  console.log(queryInfo);
+//     enabled: true,  //enabled should be given in boolean
+//   })
+//   console.log(queryInfo);
   
   
-  return queryInfo.isLoading ? (
-    'Loading...'
-  ):queryInfo.isError?(
-    queryInfo.error.message
-  ):(
-    <div>
-     {queryInfo.data?.results?.id ? (
-        <p>{queryInfo.data.results.id} </p>
-      ) : (
-        'id not found.'
-      )}
-      <br />
-      {queryInfo.isFetching ? 'Updating...' : null}
-    </div>
-  )
-}
+//   return queryInfo.isLoading ? (
+//     'Loading...'
+//   ):queryInfo.isError?(
+//     queryInfo.error.message
+//   ):(
+//     <div>
+//      {queryInfo.data?.results?.id ? (
+//         <p>{queryInfo.data.results.id} </p>
+//       ) : (
+//         'id not found.'
+//       )}
+//       <br />
+//       {queryInfo.isFetching ? 'Updating...' : null}
+//     </div>
+//   )
+// }
 
 
 
