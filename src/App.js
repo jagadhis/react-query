@@ -139,6 +139,7 @@ function MyPosts() {
     },
     {
       initialData: initialData,
+      initialStale:true,
     }
   )
 
