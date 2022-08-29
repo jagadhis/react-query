@@ -1,6 +1,6 @@
 export default {
     id: 1,
-    name: 'Leanne Graham',
+    name: 'jagadhis',
     username: 'Bret',
     email: 'Sincere@april.biz',
   }
