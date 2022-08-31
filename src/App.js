@@ -1,5 +1,5 @@
 import React from 'react'
-import { useQuery,queryCache } from 'react-query'
+import { useQuery } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools';
 import axios from 'axios'
 //import initialData from './initialData';
@@ -158,23 +158,35 @@ import axios from 'axios'
 // }
 
 
+const fetchPosts = async () => {
+  await new Promise(resolve => setTimeout(resolve, 1000))
+
+  const posts = await axios
+    .get('https://jsonplaceholder.typicode.com/posts')
+    .then(res => res.data)
+
+  console.log('On success')
+
+  return posts
+}
+
 function Posts({ setPostId }) {
-  const postsQuery = useQuery('posts', async () => {
-    await new Promise(resolve => setTimeout(resolve, 1000))
-    const posts = await axios
-      .get('https://jsonplaceholder.typicode.com/posts')
-      .then(res => res.data)
+  const [count, increment] = React.useReducer(d => d + 1, 0)
 
-    posts.forEach(post => {
-      queryCache.setQueryData(['post', post.id], post)
-    })
-
-    return posts
+  const postsQuery = useQuery('posts', fetchPosts, {
+    onSuccess: data => {
+      increment()
+    },
+    onError: error => {},
+    onSettled: (data, error) => {},
   })
 
   return (
     <div>
-      <h1>Posts {postsQuery.isFetching ? '...' : null}</h1>
+      <h1>
+        Posts {postsQuery.isFetching ? '...' : null}
+        {count}
+      </h1>
       <div>
         {postsQuery.isLoading ? (
           'Loading posts...'
