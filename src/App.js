@@ -2,7 +2,7 @@ import React from 'react'
 import { useQuery } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools';
 import axios from 'axios'
-import initialData from './initialData';
+//import initialData from './initialData';
 
 //Commented For Trying New Concepts
 
@@ -210,6 +210,9 @@ function Post({ postId, setPostId }) {
       ) : (
         <>
           {postQuery.data.title}
+          <br/>
+          <br/>
+          {postQuery.data.body}
           <br />
           <br />
           {postQuery.isFetching ? 'Updating...' : null}
