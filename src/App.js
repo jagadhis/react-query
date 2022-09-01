@@ -4,7 +4,7 @@ import { ReactQueryDevtools } from 'react-query/devtools';
 import axios from 'axios'
 import {
   BrowserRouter as Router,
-  Switch,
+  Routes,
   Route,
   Link,
   useParams,
@@ -237,14 +237,17 @@ export default function App() {
   const [postId, setPostId] = React.useState(-1)
 
   return (
-    <div>
-      {postId > -1 ? (
-        <Post postId={postId} setPostId={setPostId} />
-      ) : (
-        <Posts setPostId={setPostId} />
-      )}
-      <ReactQueryDevtools />
-    </div>
+    <Router>
+    <Switch>
+      <Route path="/:postId">
+        <Post />
+      </Route>
+      <Route path="/">
+        <Posts />
+      </Route>
+    </Switch>
+    <ReactQueryDevtools />
+  </Router>
   )
 }
 
