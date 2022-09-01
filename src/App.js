@@ -2,6 +2,13 @@ import React from 'react'
 import { useQuery } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools';
 import axios from 'axios'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useParams,
+} from 'react-router-dom'
 //import initialData from './initialData';
 
 //Commented For Trying New Concepts
