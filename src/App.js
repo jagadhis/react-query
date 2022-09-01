@@ -234,20 +234,20 @@ function Post() {
 
 export default function App() {
 
-  const [postId, setPostId] = React.useState(-1)
+
 
   return (
     <Router>
-    <Switch>
-      <Route path="/:postId">
-        <Post />
-      </Route>
-      <Route path="/">
-        <Posts />
-      </Route>
-    </Switch>
-    <ReactQueryDevtools />
-  </Router>
+      <Routes>
+        <Route path="/:postId" element={<Post />}>
+
+        </Route>
+        <Route path="/" element={<Posts />}>
+
+        </Route>
+      </Routes>
+      <ReactQueryDevtools />
+    </Router>
   )
 }
 
