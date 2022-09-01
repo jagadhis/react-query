@@ -165,35 +165,23 @@ import {
 // }
 
 
-const fetchPosts = async () => {
-  await new Promise(resolve => setTimeout(resolve, 1000))
-
-  const posts = await axios
-    .get('https://jsonplaceholder.typicode.com/posts')
-    .then(res => res.data)
-
-  console.log('On success')
-
-  return posts
-}
-
-function Posts({ setPostId }) {
-  const [count, increment] = React.useReducer(d => d + 1, 0)
-
-  const postsQuery = useQuery('posts', fetchPosts, {
-    onSuccess: data => {
-      increment()
+function Posts() {
+  const postsQuery = useQuery(
+    'posts',
+    async () => {
+      await new Promise(resolve => setTimeout(resolve, 1000))
+      return axios
+        .get('https://jsonplaceholder.typicode.com/posts')
+        .then(res => res.data)
     },
-    onError: error => {},
-    onSettled: (data, error) => {},
-  })
+    {
+      cacheTime: 10000,
+    }
+  )
 
   return (
     <div>
-      <h1>
-        Posts {postsQuery.isFetching ? '...' : null}
-        {count}
-      </h1>
+      <h1>Posts {postsQuery.isFetching ? '...' : null}</h1>
       <div>
         {postsQuery.isLoading ? (
           'Loading posts...'
@@ -202,9 +190,7 @@ function Posts({ setPostId }) {
             {postsQuery.data.map(post => {
               return (
                 <li key={post.id}>
-                  <a onClick={() => setPostId(post.id)} href="#">
-                    {post.title}
-                  </a>
+                  <Link to={`/${post.id}`}>{post.title}</Link>
                 </li>
               )
             })}
@@ -215,7 +201,9 @@ function Posts({ setPostId }) {
   )
 }
 
-function Post({ postId, setPostId }) {
+function Post() {
+  const { postId } = useParams()
+
   const postQuery = useQuery(['post', postId], async () => {
     await new Promise(resolve => setTimeout(resolve, 1000))
     return axios
@@ -225,9 +213,7 @@ function Post({ postId, setPostId }) {
 
   return (
     <div>
-      <a onClick={() => setPostId(-1)} href="#">
-        Back
-      </a>
+      <Link to="/">Back</Link>
       <br />
       <br />
       {postQuery.isLoading ? (
