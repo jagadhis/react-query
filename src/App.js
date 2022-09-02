@@ -1,5 +1,5 @@
 import React from 'react'
-import App from './Pages/_app';
+import _app from './Pages/_app';
 import { useQuery } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools';
 import axios from 'axios'
@@ -238,7 +238,7 @@ export default function App() {
 
 
   return (
-    <div><App /></div>
+    <div><_app /></div>
     // <Router>
     //   <Routes>
     //     <Route path="/:postId" element={<Post />}>
