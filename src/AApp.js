@@ -1,5 +1,5 @@
 import React from 'react'
-import _app from './Pages/_app';
+import _app from './Pages/App';
 import { useQuery } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools';
 import axios from 'axios'
